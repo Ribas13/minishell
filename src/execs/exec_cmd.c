@@ -6,7 +6,7 @@
 /*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 20:43:19 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:00:44 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@ void	child_signal(int temp_status)
 {
 	if (WTERMSIG(temp_status) == SIGQUIT)
 	{
+		close_all_fds(NULL);
 		g_exit_status = 131;
 		printf("Quit (core dumped)\n");
 	}
 	else if (WTERMSIG(temp_status) == SIGINT)
 	{
+		close_all_fds(NULL);
+		printf("\n");
 		g_exit_status = 130;
 	}
 }
