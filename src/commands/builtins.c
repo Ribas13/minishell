@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:24 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/02 23:42:04 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:01:51 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ bool	builtin(t_statement *s, t_data *data)
 		g_exit_status = cmd_env(data);
 	else
 		return (false);
+	close_all_fds(NULL);
 	return (true);
 }

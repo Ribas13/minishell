@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:54:33 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:58:42 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 				signal(SIGINT, SIG_DFL);
 				signal(SIGQUIT, SIG_DFL);
 				close_all_fds(NULL);
-				exec_executables(statement_list, data);
+				exec_executables(statement_list, data);	//fecha tudo prq um node só não tem redirs
 			}
 		}
 		else

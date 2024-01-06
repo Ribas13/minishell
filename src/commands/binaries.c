@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:46:47 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:03:53 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:00:29 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char	*get_bin_path(char	*cmd, char **paths)
 (WIFSIGNALED checks to see if a child process ended abnormally) */
 static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 {
+	close_all_fds(NULL);
 	if (cmd)
 		perror(cmd);
 	free_matrix(paths);
