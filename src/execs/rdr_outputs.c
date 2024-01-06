@@ -6,7 +6,7 @@
 /*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 20:18:31 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 20:24:30 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:12:17 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ void	out_error(t_statement *node, t_statement *head)
 	}
 }
 
-void	ft_open(t_statement *temp, t_statement *node)
+void	ft_open(t_statement *temp, t_statement *node, bool append)
 {
-	if (node->has_error == false
+	if (!append && node->has_error == false
 		&& open(temp->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666) == -1)
+		out_error(temp, node);
+	if (append && node->has_error == false
+		&& open(temp->next->argv[0], O_WRONLY | O_APPEND | O_CREAT, 0666) == -1)
 		out_error(temp, node);
 }
 
@@ -74,9 +77,9 @@ void	set_output(t_statement *node)
 			if (temp->operator == PIPE)
 				break ;
 			if (temp->operator == RDR_OUT_REPLACE)
-				ft_open(temp, node);
+				ft_open(temp, node, false);
 			else if (temp->operator == RDR_OUT_APPEND)
-				ft_open(temp, node);
+				ft_open(temp, node, true);
 			temp = temp->next;
 			if (!is_last_out_rdr(node, temp))
 				close(1);
