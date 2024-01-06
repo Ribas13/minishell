@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 16:31:35 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 23:05:48 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:48:24 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	**parse_input(char *input)
 		parsed[k++][j] = '\0';
 	}
 	parsed[k] = NULL;
+	free(input);
 	return (parsed);
 }
 
@@ -52,7 +53,6 @@ t_statement	*parser(char *input)
 	size_t		j;
 
 	parsed = parse_input(input);
-	free(input);
 	temp = p_new_node(get_ac(&parsed[0]));
 	head = temp;
 	i = 0;
