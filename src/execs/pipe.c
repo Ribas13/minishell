@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:42:55 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/04 18:22:12 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:58:05 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ static void	left_side(t_statement *nd, t_data *data, int pipe_fds[2])
 	{
 		close(STDOUT_FILENO);
 		dup(pipe_fds[1]);
-		close(pipe_fds[0]);
-		close(pipe_fds[1]);
 	}
+	close_all_fds(pipe_fds, data->default_stdin, data->default_stdout);
 	if (nd->operator == PIPE)
 		nd->operator = NONE;
 	exec_cmd(nd, data);
@@ -56,9 +55,9 @@ static void	right_side(t_statement *nd, t_data *data, int pipe_fds[2])
 	{
 		close(STDIN_FILENO);
 		dup(pipe_fds[0]);
-		close(pipe_fds[0]);
-		close(pipe_fds[1]);
 	}
+	close(pipe_fds[0]);
+	close(pipe_fds[1]);
 	if (nd->previous_has_out_rdr == true)
 		dup2(ft_data()->default_stdout, STDOUT_FILENO);
 	if (nd->operator == PIPE)
@@ -89,16 +88,12 @@ void	exec_pipe(t_statement *node, t_data *data)
 	child_pid = fork();
 	if (child_pid == -1)
 		panic(data, FORK_ERR, EXIT_FAILURE);
-	/* ft_putstr_fd(node->argv[0], STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO); */
-	if (node->has_out_rdr == true)
-		left_side_out_rdr = true;
+	left_side_out_rdr = node->has_out_rdr;
 	if (child_pid == 0)
 		left_side(node, data, pipe_fds);
-	//jump_to_next cmd
 	else
 	{
-		if (node->operator == NONE && node->has_in_rdr == false && node->has_out_rdr == false && child_pid > 0) //also add ouput redir
+		if (node->operator == NONE && node->has_in_rdr == false && node->has_out_rdr == false && child_pid > 0) //O esle que está já implica que o child_
 		{
 			if (left_side_out_rdr == true)
 				node->next->previous_has_out_rdr = true;
@@ -116,9 +111,7 @@ void	exec_pipe(t_statement *node, t_data *data)
 				node->previous_has_out_rdr = true;
 			right_side(node, data, pipe_fds);
 		}
-		close(pipe_fds[0]);
-		close(pipe_fds[1]);
 		waitpid(child_pid, &temp_status, 0);
-		g_exit_status = temp_status >> 8;
+		g_exit_status = temp_status >> 8;		//testar com e sem, dando shift 8x nos bits volta o valor do numero para zero
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+         #
+#    By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2024/01/06 19:04:18 by diosanto         ###   ########.fr        #
+#    Updated: 2024/01/06 19:19:59 by ysantos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT		= 	./libft/libft.a
 UTILS		=	invalid_syntax_utils cd_utils cmd_utils destroy fits_longlong free_matrix 		\
 				ft_atoll ft_lltoa init_envp_lst is_all_digits_or_signals	\
 				is_onstr is_spaces join_free p_llst_utils streq trim_free 	\
-				v_llst_utils_v2 v_llst_utils valid_input
+				v_llst_utils_v2 v_llst_utils valid_input close_fds
 PARSER		=	invalid_syntax parser parser_utils remove_quotes join_args
 EXPANDER	=	expander expander_utils
 GENERAL		=	config_signals setup_shell

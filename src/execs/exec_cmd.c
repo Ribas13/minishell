@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 17:44:17 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:17:21 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,41 +73,41 @@ temp_status var)
 4. WTERMSIG extracts the signal number that caused the process to end
 5. bit shift the temp_status to save the exit_status(the exit status
 is stored in the last 8 bits of the var, thus isolating the exit status) */
-void    exec_type(t_statement *statement_list, t_data *data)
+void	exec_type(t_statement *statement_list, t_data *data)
 {
-    int    temp_status;
+	int	temp_status;
 
-    signal(SIGINT, SIG_IGN);
-    temp_status = 0;
-	//print_lst(statement_list);
-    if (p_lstsize(statement_list) == 1)
-    {
-        if (!builtin(statement_list, data))
-        {
-            if (fork() == 0)
-            {
-                signal(SIGINT, SIG_DFL);
-                signal(SIGQUIT, SIG_DFL);
-                exec_executables(statement_list, data);
-            }
-        }
-        else
-        {
-            signal(SIGINT, &dismiss_signal);
-            return ;
-        }
-    }
-    else if (fork() == 0)
-    {
-        signal(SIGINT, SIG_DFL);
-        signal(SIGQUIT, SIG_DFL);
-        exec_cmd(statement_list, data);
-    }
-    waitpid(-1, &temp_status, 0);
-    signal(SIGINT, &dismiss_signal);
-//    g_exit_status = 0;
-    if (WTERMSIG(temp_status))
-        child_signal(temp_status);
-    else
-        g_exit_status = WEXITSTATUS(temp_status);
+	signal(SIGINT, SIG_IGN);
+	temp_status = 0;
+	if (p_lstsize(statement_list) == 1)
+	{
+		if (!builtin(statement_list, data))
+		{
+			if (fork() == 0)
+			{
+				signal(SIGINT, SIG_DFL);
+				signal(SIGQUIT, SIG_DFL);
+				close_all_fds(NULL, data->default_stdin, data->default_stdout);
+				exec_executables(statement_list, data);
+			}
+		}
+		else
+		{
+			signal(SIGINT, &dismiss_signal);
+			return ;
+		}
+	}
+	else if (fork() == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		exec_cmd(statement_list, data);
+		close_all_fds(NULL, data->default_stdin, data->default_stdout);
+	}
+	waitpid(-1, &temp_status, 0);
+	signal(SIGINT, &dismiss_signal);
+	if (WTERMSIG(temp_status))
+		child_signal(temp_status);
+	else
+		g_exit_status = WEXITSTATUS(temp_status);
 }
