@@ -1,0 +1,5 @@
+exportminishell
+obj/
+*.o
+*.a
+minishell_tester/*
