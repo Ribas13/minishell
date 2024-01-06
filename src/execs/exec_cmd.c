@@ -6,7 +6,7 @@
 /*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 20:36:11 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:43:19 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ static void	more_args(t_statement *statement_list, t_data *data)
 	close_all_fds(NULL);
 }
 
+static void	one_arg(t_statement *statement_list, t_data *data)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	close_all_fds(NULL);
+	exec_executables(statement_list, data);
+}
+
 /* Determines if the execution will take place in the current process
 or if there's a need to create a separate one for the execution(ie. fork)
 if there's more than one command to be run
@@ -78,12 +86,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 		if (!builtin(statement_list, data))
 		{
 			if (fork() == 0)
-			{
-				signal(SIGINT, SIG_DFL);
-				signal(SIGQUIT, SIG_DFL);
-				close_all_fds(NULL);
-				exec_executables(statement_list, data);
-			}
+				one_arg(statement_list, data);
 		}
 		else
 		{

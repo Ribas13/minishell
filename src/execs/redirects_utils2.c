@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 00:25:43 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 21:33:30 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:44:45 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_input(t_statement *temp, t_statement *node)
 		&& (temp->operator == NONE || temp->operator == RDR_INPUT)
 		&& access(temp->next->argv[0], F_OK) != 0)
 	{
-		error_msg_prefix = ft_strjoin("minishell: ",		//mudar para minishell
+		error_msg_prefix = ft_strjoin("minishell: ",
 				temp->next->argv[0]);
 		perror(error_msg_prefix);
 		free(error_msg_prefix);
@@ -60,7 +60,7 @@ void	check_output(t_statement *temp, t_statement *node)
 		&& access(node->next->argv[0], F_OK) == 0
 		&& access(node->next->argv[0], W_OK) == -1)
 	{
-		error_msg_prefix = ft_strjoin("check_output: ", temp->next->argv[0]);		//mudar para minishell
+		error_msg_prefix = ft_strjoin("check_output: ", temp->next->argv[0]);
 		perror(error_msg_prefix);
 		free(error_msg_prefix);
 		g_exit_status = 1;
