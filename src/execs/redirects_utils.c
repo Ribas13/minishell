@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:49:21 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/02 20:45:23 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:28:54 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
- void	print_statements(t_statement *node)
-{
-	int n = 0;
-	while (node)	{
-		printf("node %d\n", n++);
-		for (int i = 0; node->argv[i]; i++)	{
-			printf("node->argv[%d] = \"%s\", ", i, node->argv[i]);
-		}
-		printf("\n");
-		node = node->next;
-	}
-	printf("\n\n");
-}
+
 char	*get_last_delim(t_statement *node)
 {
 	t_statement	*temp;

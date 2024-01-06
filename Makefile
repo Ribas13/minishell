@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+         #
+#    By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2024/01/06 19:19:59 by ysantos-         ###   ########.fr        #
+#    Updated: 2024/01/06 20:22:22 by diosanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ EXPANDER	=	expander expander_utils
 GENERAL		=	config_signals setup_shell
 COMMANDS	=	binaries builtins binaries_utils
 BUILTINS	=	echo env exit export pwd unset cd
-EXECUTES	=	exec_cmd executables pipe redirects redirects_utils redirects_utils2
+EXECUTES	=	exec_cmd executables pipe redirects redirects_utils redirects_utils2	\
+				rdr_outputs rdr_inputs
 
 SRCS		=	main.c						 	\
 				$(addsuffix .c, $(UTILS))		\

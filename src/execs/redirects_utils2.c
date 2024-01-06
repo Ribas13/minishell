@@ -6,7 +6,7 @@
 /*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 00:25:43 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 18:58:46 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:14:21 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	check_input(t_statement *temp, t_statement *node)
 		error_msg_prefix = ft_strjoin("minishell: ",
 				temp->next->argv[0]);
 		perror(error_msg_prefix);
+		free(error_msg_prefix);
 		g_exit_status = 2;
 		node->has_error = true;
 	}

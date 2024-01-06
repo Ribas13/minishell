@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:58:42 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:36:11 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,13 @@ void	child_signal(int temp_status)
 	}
 }
 
-/* void	print_statements(t_statement *node)
+static void	more_args(t_statement *statement_list, t_data *data)
 {
-	int n = 0;
-	while (node)	{
-		printf("node %d\n", n++);
-		for (int i = 0; node->argv[i]; i++)	{
-			printf("node->argv[%d] = \"%s\", ", i, node->argv[i]);
-		}
-		printf("\n");
-		node = node->next;
-	}
-	printf("\n\n");
-} */
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	exec_cmd(statement_list, data);
+	close_all_fds(NULL);
+}
 
 /* Determines if the execution will take place in the current process
 or if there's a need to create a separate one for the execution(ie. fork)
@@ -88,7 +82,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 				signal(SIGINT, SIG_DFL);
 				signal(SIGQUIT, SIG_DFL);
 				close_all_fds(NULL);
-				exec_executables(statement_list, data);	//fecha tudo prq um node só não tem redirs
+				exec_executables(statement_list, data);
 			}
 		}
 		else
@@ -98,12 +92,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 		}
 	}
 	else if (fork() == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		exec_cmd(statement_list, data);
-		close_all_fds(NULL);
-	}
+		more_args(statement_list, data);
 	waitpid(-1, &temp_status, 0);
 	signal(SIGINT, &dismiss_signal);
 	if (WTERMSIG(temp_status))
