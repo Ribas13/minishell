@@ -6,7 +6,7 @@
 /*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:45:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 22:00:44 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:03:59 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	child_signal(int temp_status)
 
 static void	more_args(t_statement *statement_list, t_data *data)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, &child_signal);
+	signal(SIGQUIT, &child_signal);
 	exec_cmd(statement_list, data);
 	close_all_fds(NULL);
 }

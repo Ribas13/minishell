@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_inputs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 20:14:48 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 21:31:58 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:12:40 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	redirect_input_until(t_statement *node)
 	pipe(fd);
 	buff = NULL;
 	temp = node;
-	signal(SIGQUIT, &dismiss_signal);
+	signal(SIGQUIT, SIG_IGN);
 	ft_heredoc(node, fd, buff);
 	signal(SIGQUIT, SIG_IGN);
 	close(fd[1]);
