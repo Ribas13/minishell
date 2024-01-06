@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_outputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 20:18:31 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 23:12:17 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:46:13 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,47 @@ void	out_error(t_statement *node, t_statement *head)
 	}
 }
 
-void	ft_open(t_statement *temp, t_statement *node, bool append)
+int	ft_open(t_statement *temp, t_statement *node, bool append)
 {
-	if (!append && node->has_error == false
-		&& open(temp->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666) == -1)
-		out_error(temp, node);
-	if (append && node->has_error == false
-		&& open(temp->next->argv[0], O_WRONLY | O_APPEND | O_CREAT, 0666) == -1)
-		out_error(temp, node);
+	int	fd;
+
+	if (!append && node->has_error == false)
+	{
+		fd = open(temp->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		if (fd == -1)
+			out_error(temp, node);
+	}
+	if (append && node->has_error == false)
+	{
+		fd = open(temp->next->argv[0], O_WRONLY | O_APPEND | O_CREAT, 0666);
+		if (fd == -1)
+			out_error(temp, node);
+	}
+	return (fd);
 }
 
 void	set_output(t_statement *node)
 {
 	t_statement	*temp;
+	int			fd;
 
 	temp = node;
 	if (has_output_redir(node) == true)
 	{
 		temp->has_out_rdr = true;
-		close(STDOUT_FILENO);
 		while (temp->next != NULL)
 		{
 			temp->has_out_rdr = true;
 			if (temp->operator == PIPE)
 				break ;
 			if (temp->operator == RDR_OUT_REPLACE)
-				ft_open(temp, node, false);
+				fd = ft_open(temp, node, false);
 			else if (temp->operator == RDR_OUT_APPEND)
-				ft_open(temp, node, true);
+				fd = ft_open(temp, node, true);
 			temp = temp->next;
-			if (!is_last_out_rdr(node, temp))
-				close(1);
+			if (is_last_out_rdr(node, temp))
+				dup2(fd, STDOUT_FILENO);
+			close(fd);
 		}
 		temp->has_out_rdr = true;
 	}
