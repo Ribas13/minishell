@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 16:31:35 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/03 23:31:25 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:05:48 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_statement	*parser(char *input)
 			break ;
 		temp->operator = get_operator(parsed[i++]);
 		temp->next = p_new_node(get_ac(&parsed[j]));
+		temp->argc = j;
 		temp = temp->next;
 	}
 	free(parsed);
