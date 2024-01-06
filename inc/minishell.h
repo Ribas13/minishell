@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:08:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:19:40 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:54:14 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void		cmd_not_found(char *cmd_name);
 
 void		destroy(t_data *data);
 void		v_lstclear(t_vlst **head);
-void		close_all_fds(int pipe[2], int dfl_stdin, int dfl_stdout);
+void		close_all_fds(int pipe[2]);
 
 //init_envp_lst.c
 

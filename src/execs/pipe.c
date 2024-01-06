@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:42:55 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 18:58:05 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:56:05 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	left_side(t_statement *nd, t_data *data, int pipe_fds[2])
 		close(STDOUT_FILENO);
 		dup(pipe_fds[1]);
 	}
-	close_all_fds(pipe_fds, data->default_stdin, data->default_stdout);
+	close_all_fds(pipe_fds);
 	if (nd->operator == PIPE)
 		nd->operator = NONE;
 	exec_cmd(nd, data);
@@ -48,9 +48,6 @@ and executes the cmd
 5. Execute the command */
 static void	right_side(t_statement *nd, t_data *data, int pipe_fds[2])
 {
-	/* ft_putstr_fd("\tRIGHT_SIDE: ", STDERR_FILENO);
-	ft_putstr_fd(nd->argv[0], STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO); */
 	if (nd->has_in_rdr == false)
 	{
 		close(STDIN_FILENO);
@@ -61,10 +58,7 @@ static void	right_side(t_statement *nd, t_data *data, int pipe_fds[2])
 	if (nd->previous_has_out_rdr == true)
 		dup2(ft_data()->default_stdout, STDOUT_FILENO);
 	if (nd->operator == PIPE)
-	{
-		//nd->operator = NONE;
 		exec_cmd(nd->next, data);
-	}
 	else
 		exec_cmd(nd, data);
 }

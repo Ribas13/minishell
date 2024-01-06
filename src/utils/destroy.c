@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:35:34 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:00:29 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:54:45 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	destroy(t_data *data)
 		v_lstclear(&data->envp_lst);
 	if (data->head)
 		p_lstclear(&data->head);
-	close_all_fds(NULL, data->default_stdin, data->default_stdout);
+	close_all_fds(NULL);
 }
