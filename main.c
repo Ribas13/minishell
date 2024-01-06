@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 17:02:58 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 21:45:35 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:52:33 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **envp)
 			free(input);
 			continue ;
 		}
-		statement_list = parser(input);
+		statement_list = parser(input, 0);
 		data.head = statement_list;
 		exec_type(statement_list, &data);
 		clean_parsed(&statement_list, &data);

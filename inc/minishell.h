@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:08:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 21:21:53 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:52:43 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,7 +328,7 @@ t_operator	get_operator(char *operator);
 
 //parser.c
 
-t_statement	*parser(char *input);
+t_statement	*parser(char *input, int i);
 char		**parse_input(char *input);
 void		join_args(t_statement *head);
 
