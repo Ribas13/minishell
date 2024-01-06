@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:50:45 by diosanto          #+#    #+#             */
-/*   Updated: 2023/12/15 18:31:08 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:03:25 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	exit_non_numeric_arg(void)
   */
 void	cmd_exit(t_statement *s, t_data *data)
 {
-	ft_putendl_fd("exit", STDOUT_FILENO);
+	ft_putendl_fd("exit", STDOUT_FILENO);			//to remove or make it pretty
 	if (s->argc == 2)
 	{
 		if (is_all_digits_or_signals(s->argv[1]))

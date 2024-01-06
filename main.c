@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 17:02:58 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 18:48:25 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:11:02 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int ac, char **av, char **envp)
 	set_def_std();
 	while (1)
 	{
+usleep(5000);		//só para o valgrind escrever sempre antes
 		input = get_input();
 		if (!valid_input(input, &data))
 			continue ;

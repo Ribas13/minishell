@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_inputs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 20:14:48 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 20:35:26 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:31:58 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static void	ft_heredoc(t_statement *node, int fd[2], char *buff)
 				buff = readline("> ");
 				if (buff == NULL || streq(buff, node->next->argv[0]))
 				{
-					if (buff != NULL
-						&& !is_last_delim(node, node->next->argv[0]))
+					if (buff != NULL)
 						free(buff);
 					break ;
 				}

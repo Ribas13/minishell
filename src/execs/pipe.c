@@ -6,7 +6,7 @@
 /*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:42:55 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 19:56:05 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:40:39 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ and executes the cmd
 5. Execute the cmd */
 static void	left_side(t_statement *nd, t_data *data, int pipe_fds[2])
 {
-	/* ft_putstr_fd("\tLEFT_SIDE: ", STDERR_FILENO);
-	ft_putstr_fd(nd->argv[0], STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO); */
 	if (nd->has_out_rdr == false)
 	{
 		close(STDOUT_FILENO);
@@ -63,6 +60,26 @@ static void	right_side(t_statement *nd, t_data *data, int pipe_fds[2])
 		exec_cmd(nd, data);
 }
 
+static void	choose_node(t_statement *node, bool left_side_out_rdr
+	, t_data *data, int pipes[2])
+{
+	if (node->operator == NONE && node->has_in_rdr == false
+		&& node->has_out_rdr == false)
+	{
+		if (left_side_out_rdr == true)
+			node->next->previous_has_out_rdr = true;
+		right_side(node->next, data, pipes);
+	}
+	else
+	{
+		while (node->operator != PIPE)
+			node = node->next;
+		if (left_side_out_rdr == true)
+			node->previous_has_out_rdr = true;
+		right_side(node, data, pipes);
+	}
+}
+
 /* Handles the execution of commands connected by a pipe.
 
 1. Creates a new pipe
@@ -87,25 +104,7 @@ void	exec_pipe(t_statement *node, t_data *data)
 		left_side(node, data, pipe_fds);
 	else
 	{
-		if (node->operator == NONE && node->has_in_rdr == false && node->has_out_rdr == false && child_pid > 0) //O esle que está já implica que o child_
-		{
-			if (left_side_out_rdr == true)
-				node->next->previous_has_out_rdr = true;
-			right_side(node->next, data, pipe_fds);
-		}
-		else if (child_pid > 0)
-		{
-			while (node->operator != PIPE)
-			{
-				if (node->operator == PIPE)
-					break ;
-				node = node->next;
-			}
-			if (left_side_out_rdr == true)
-				node->previous_has_out_rdr = true;
-			right_side(node, data, pipe_fds);
-		}
+		choose_node(node, left_side_out_rdr, data, pipe_fds);
 		waitpid(child_pid, &temp_status, 0);
-		g_exit_status = temp_status >> 8;		//testar com e sem, dando shift 8x nos bits volta o valor do numero para zero
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:08:59 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/06 20:29:22 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:21:53 by ysantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,8 +290,6 @@ void		set_input(t_statement *node);
 //rdr_outputs.c
 
 void		set_output(t_statement *node);
-void		ft_open(t_statement *temp, t_statement *node);
-void		out_error(t_statement *node, t_statement *head);
 bool		is_last_out_rdr(t_statement *node, t_statement *nd_to_check);
 
 	/* expander */
