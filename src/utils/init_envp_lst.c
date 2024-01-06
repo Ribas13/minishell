@@ -3,33 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:09:51 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/03 00:04:59 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:49:55 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* Unsets the existing "OLDPWD" variable, creates a new value by combining
-"OLDPWD=" with the user's home dir, saves the new value in the env vars list,
-and then frees the mem allocated for temporary string
-
-1. Unset the "OLDPWD" env var
-2. Create a new value for "OLDPWD" with the user's home dir
-3. Save the new "OLDPWD" value in the env var list
-4. Free temp */
-/* static void	init_oldpwd(t_vlst **head)
-{
-	char	*temp;
-
-	unset_var("OLDPWD", head);
-	temp = ft_strjoin("OLDPWD=", getenv("HOME"));
-	save_user_vars(temp, head, true);
-	free(temp);
-}
- */
 /* Split each environment variable into components, creates nodes for
 each variable, and links them together to form a linked list. Also
 initializes the "OLDPWD" environment variable, and finally, it returns
@@ -66,6 +48,5 @@ t_vlst	*init_envp_lst(char **envp)
 		temp = temp->next;
 		i++;
 	}
-	//init_oldpwd(&head);
 	return (head);
 }

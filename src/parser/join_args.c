@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   join_args.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/06 18:50:12 by diosanto          #+#    #+#             */
+/*   Updated: 2024/01/06 18:51:02 by diosanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 /* Return copy of array with a copy of string added to it.
@@ -32,14 +44,6 @@ static void	jump_one_array(char **array, int i)
 		array[i] = array[i + 1];
 }
 
-void print_strs(char **strs)	{
-	printf("Array of strings is:\n");
-	for (int i = 0; strs[i]; i++)	{
-		printf("%s\n", strs[i]);
-	}
-	printf("\n");
-}
-
 /** @brief Will move all extra arguments from one node to another
  * @param cmd Node that contains the command
  * @param move Node that contains the arguments */
@@ -54,7 +58,6 @@ static void	move_extra_args(t_statement *cmd, t_statement *move)
 		jump_one_array(move->argv, i);
 		cmd->argc++;
 	}
-//	print_strs(cmd->argv);
 }
 
 /* For every command it will take nodes without INPUT/OUTPUT

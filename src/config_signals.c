@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_signals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:35:02 by diosanto          #+#    #+#             */
-/*   Updated: 2023/12/29 17:11:15 by ysantos-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:12:54 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	dismiss_signal(int signum)
 	}
 	if (signum == SIGQUIT)
 	{
-		ft_putstr_fd("minishell: warning: unexpected EOF while looking for matching delimiter\n", STDOUT_FILENO);
+		ft_putstr_fd("minishell: warning: unexpected EOF ", STDOUT_FILENO);
+		ft_putstr_fd("while looking for matching delimiter\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

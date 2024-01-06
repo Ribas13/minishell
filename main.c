@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 17:02:58 by diosanto          #+#    #+#             */
-/*   Updated: 2024/01/03 00:58:20 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:48:25 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,11 @@ static void	clean_parsed(t_statement **statement_list, t_data *data)
 	data->head = NULL;
 }
 
-/* void	print_lst(t_statement *node)
+void	set_def_std(void)
 {
-	t_statement *temp;
-
-	temp = node;
-	while (temp->next != NULL)
-	{
-		int i = 0;
-		//while (temp->argv[i])
-		//{
-			printf("\n%s has an operator of ", temp->argv[i]);
-			if (temp->operator == RDR_INPUT || temp->operator == RDR_INPUT_UNTIL)
-				printf("input redirection\n");
-			else if (temp->operator == RDR_OUT_APPEND || temp->operator == RDR_OUT_REPLACE)
-				printf("ouput redirection\n");
-			else if (temp->operator == PIPE)
-				printf("pipe\n");
-			else
-				printf("nothing\n");
-		//}
-		temp = temp->next;
-	}
-	printf("\n%s has an operator of ", temp->argv[0]);
-			if (temp->operator == RDR_INPUT || temp->operator == RDR_INPUT_UNTIL)
-				printf("input redirection\n");
-			else if (temp->operator == RDR_OUT_APPEND || temp->operator == RDR_OUT_REPLACE)
-				printf("ouput redirection\n");
-			else if (temp->operator == PIPE)
-				printf("pipe\n");
-			else
-				printf("nothing\n");
-} */
+	ft_data()->default_stdin = dup(STDIN_FILENO);
+	ft_data()->default_stdout = dup(STDOUT_FILENO);
+}
 
 /*
 1. check for args being provided upon execution(error)
@@ -105,8 +78,7 @@ int	main(int ac, char **av, char **envp)
 	if (av && ac > 1)
 		panic(NULL, CL_ARGUMENTS_ERR, EXIT_FAILURE);
 	setup_shell(envp, &data, &statement_list);
-	ft_data()->default_stdin = dup(STDIN_FILENO);
-	ft_data()->default_stdout = dup(STDOUT_FILENO);
+	set_def_std();
 	while (1)
 	{
 		input = get_input();

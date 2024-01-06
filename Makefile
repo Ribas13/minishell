@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysantos- <ysantos-@student.42.fr>          +#+  +:+       +#+         #
+#    By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2024/01/03 21:34:19 by ysantos-         ###   ########.fr        #
+#    Updated: 2024/01/06 19:04:18 by diosanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ UTILS		=	invalid_syntax_utils cd_utils cmd_utils destroy fits_longlong free_matr
 PARSER		=	invalid_syntax parser parser_utils remove_quotes join_args
 EXPANDER	=	expander expander_utils
 GENERAL		=	config_signals setup_shell
-COMMANDS	=	binaries builtins 
+COMMANDS	=	binaries builtins binaries_utils
 BUILTINS	=	echo env exit export pwd unset cd
 EXECUTES	=	exec_cmd executables pipe redirects redirects_utils redirects_utils2
 

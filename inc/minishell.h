@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/06 19:08:59 by diosanto          #+#    #+#             */
+/*   Updated: 2024/01/06 19:11:21 by diosanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -29,6 +40,8 @@
 # define QUOTES "\"\'"
 # define DELIMS "\"\'"
 # define REDIRECTS "><"
+
+# define NOT_FOUND 0
 
 // Errors
 

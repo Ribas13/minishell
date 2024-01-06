@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diosanto <diosanto@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: diosanto <diosanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 16:10:15 by diosanto          #+#    #+#             */
-/*   Updated: 2023/12/24 19:51:35 by diosanto         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:51:31 by diosanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t	expand_size(char *input_at_i, size_t *i, t_data *data)
 		&& input_at_i[var_size + 1] != ' '
 		&& !is_onstr(QUOTES, input_at_i[var_size + 1])
 		&& input_at_i[var_size + 1] != '$')
-			var_size += 1;
+		var_size += 1;
 	if (var_size == 0)
 		return (0);
 	var_name = ft_substr(input_at_i, 1, var_size);
