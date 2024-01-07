@@ -69,6 +69,7 @@ static void	redirect_input(t_statement *node, t_statement *head)
 	{
 		in_file = open(node->argv[0], O_RDONLY, 0666);
 		dup2(in_file, STDIN_FILENO);
+		close(in_file);
 	}
 	else if (head->has_error == false)
 	{
