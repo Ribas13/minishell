@@ -45,6 +45,7 @@ void	check_input(t_statement *temp, t_statement *node)
 				temp->next->argv[0]);
 		perror(error_msg_prefix);
 		free(error_msg_prefix);
+		close_all_fds(NULL);
 		g_exit_status = 2;
 		node->has_error = true;
 	}
@@ -63,6 +64,7 @@ void	check_output(t_statement *temp, t_statement *node)
 		error_msg_prefix = ft_strjoin("check_output: ", temp->next->argv[0]);
 		perror(error_msg_prefix);
 		free(error_msg_prefix);
+		close_all_fds(NULL);
 		g_exit_status = 1;
 		node->has_error = true;
 	}

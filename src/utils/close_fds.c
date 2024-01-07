@@ -21,7 +21,13 @@ void	close_all_fds(int pipe[2])
 		close(pipe[1]);
 	}
 	if (ft_data()->default_stdin > 2)
+	{
 		close(ft_data()->default_stdin);
+		ft_data()->default_stdin = 0;
+	}
 	if (ft_data()->default_stdout > 2)
+	{
 		close(ft_data()->default_stdout);
+		ft_data()->default_stdout = 1;
+	}
 }

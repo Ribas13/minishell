@@ -48,6 +48,7 @@ void	out_error(t_statement *node, t_statement *head)
 		perror(error_msg_prefix);
 		free(error_msg_prefix);
 		g_exit_status = 1;
+		close_all_fds(NULL);
 		head->has_error = true;
 	}
 }
