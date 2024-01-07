@@ -56,6 +56,7 @@ int	ft_open(t_statement *temp, t_statement *node, bool append)
 {
 	int	fd;
 
+	fd = -1;
 	if (!append && node->has_error == false)
 	{
 		fd = open(temp->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666);
@@ -76,6 +77,7 @@ void	set_output(t_statement *node)
 	t_statement	*temp;
 	int			fd;
 
+	fd = -1;
 	temp = node;
 	if (has_output_redir(node) == true)
 	{
@@ -90,9 +92,10 @@ void	set_output(t_statement *node)
 			else if (temp->operator == RDR_OUT_APPEND)
 				fd = ft_open(temp, node, true);
 			temp = temp->next;
-			if (is_last_out_rdr(node, temp))
+			if (fd != -1 && is_last_out_rdr(node, temp))
 				dup2(fd, STDOUT_FILENO);
-			close(fd);
+			if (fd != -1)
+				close(fd);
 		}
 		temp->has_out_rdr = true;
 	}
